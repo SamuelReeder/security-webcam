@@ -3,10 +3,11 @@ Main file for implementing motion detection and clip saving
 """
 
 
-import time, pandas, cv2, numpy
+import cv2, numpy, sys
 
 from datetime import datetime
 
+suffix = sys.argv[1]
 
 CAMERA_INDEX = 0
 
@@ -19,7 +20,7 @@ if not video.isOpened():
 video.set(3,1280)
 video.set(4,720)
 
-writer= cv2.VideoWriter('MOTION.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 20.0, (int(video.get(cv2.CAP_PROP_FRAME_WIDTH)), int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))))
+writer= cv2.VideoWriter('recording_' + str(suffix) + '.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 20.0, (int(video.get(cv2.CAP_PROP_FRAME_WIDTH)), int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))))
 
 rgb = (51,255,51)
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -55,8 +56,3 @@ while True:
 video.release()
 writer.release()
 cv2.destroyAllWindows()
-    
-
-
-
-
